@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,15 +48,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script>
         var draw_arbitrary_shape = function(dimensions, points) {
-            var points2_stringify = "'";
-            for (var i=0; i<points2.length; i++) {
-                points2_stringify += points2[i].x + "," + points2[i].y + " "
+            var points_stringify = "'";
+            for (var i=0; i<points.length; i++) {
+                points_stringify += points[i].x + "," + points[i].y + " "
             }
-            points2_stringify += "'";
+            points_stringify += "'";
 
             var html = "";
             html += "<svg height="+dimensions.x+" width="+dimensions.y+">";
-            html += "<polygon points=" +points2_stringify + "style='border: 1px solid #808080'"
+            html += "<polygon points=" +points_stringify + "style='border: 1px solid #808080'"
             html += "</svg>"
             return html
         }
@@ -67,8 +68,8 @@
             {x:80, y:100, },
             {x:170, y:190, },
         ];
-        var html = draw_arbitrary_shape(dimensions, points2);
-        $('#blah').html(html);
+        var image_html = draw_arbitrary_shape(dimensions, points2)
+        $('#blah').html(image_html);
     </script>
 
 
