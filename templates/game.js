@@ -5,9 +5,57 @@ var globals = {
 
 var gen_convex_polygon = function(dimensions) {
 	// TODO
-	return [{x:50, y:50,}, {x:100, y:100,}, {x:150, y:50},]
+	var num_points = 5;
+    var edges =[];
+    var sum_vec = {x:0,y:0,};
+    for(var i = 0;i<num_points;i++){
+        edges.push({x:Math.random(),y:Math.random()});
+        sum_vec.x+=edges[edges.length-1].x;
+        sum_vec.y+=edges[edges.length-1].y;
+    }
+    sum_vec.x/=num_points;
+    sum_vec.y/=num_points;
+    
+    for(var i = 0;i<num_points;i++){
+        edges[i].x-=sum_vec.x;
+        edges[i].y-=sum_vec.y;
+    }
+    edges.sort(function(pt1,pt2){
+        return Math.atan2(pt1.x,pt1.y)-Math.atan2(pt2.x,pt2.y);
+    });
+    for(var i = 0;i<num_points;i++){
+        console.log(Math.atan2(edges[i].x,edges[i].y));
+    }
+    var points = [];
+    var min_x = 0;
+    var min_y = 0;
+    var max_x = 0;
+    var max_y = 0;
+    points.push({x:0,y:0,});
+    for(var i = 1;i<num_points;i++){
+        points.push( {x:points[i-1].x + edges[i].x, y:points[i-1].y + edges[i].y,});
+        min_x = Math.min(min_x, points[i].x);
+        min_y = Math.min(min_y, points[i].y);
+        max_x = Math.max(max_x, points[i].x);
+        max_y = Math.max(max_y, points[i].y);
+    }
+    for(var i  = 0;i<num_points;i++){
+        points[i].x = dimensions.x*(points[i].x-min_x)/(max_x-min_x);
+        points[i].y = dimensions.y*(points[i].y-min_y)/(max_y-min_y);
+    }
+    return points;
+
 }
 
+var twice_area = function(points){
+	var ans = 0;
+	for(var i = 0;i<points.length;i++){
+		ans+=points[i].x*points[(i+1)%points.length].y;
+		ans-=points[i].y*points[(i+1)%points.length].x;
+	}
+	return Math.abs(ans);
+
+}
 var shape_html = function(dimensions, points) {
     var points_stringify = "'";
     for (var i=0; i<points.length; i++) {
@@ -33,17 +81,22 @@ var show_score = function() {
 
 var show_polygons = function() {
 	$('#shape0').data('dimensions', globals.dimensions);
-	$('#shape0').data('points', gen_convex_polygon());
+	$('#shape0').data('points', gen_convex_polygon(globals.dimensions));
 	draw_shape($('#shape0'));
 
 	$('#shape1').data('dimensions', globals.dimensions);
-	$('#shape1').data('points', gen_convex_polygon());
+	$('#shape1').data('points', gen_convex_polygon(globals.dimensions));
 	draw_shape($('#shape1'));
 }
 
 var which_is_bigger = function(points0, points1) {
 	// TODO
-	return 1;
+	if(twice_area(points0)>twice_area(points1)){
+		return 0;
+	}
+	else{
+		return 1;
+	}
 }
 
 var guess = function(answer) {
