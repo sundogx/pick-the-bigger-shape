@@ -38,12 +38,33 @@
     </nav>
 
     <div class="container text-center" id="game" style='padding-top:100px'>
-        GAME GOES HERE
+        <canvas id="blah" width="200" height="200" style="border: 1px solid #808080">
+        </canvas>
     </div>
 
     <!-- Bootstrap scripts -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script>
+        var canvas = $('#blah')[0];
+        var ctx = canvas.getContext("2d");
+        ctx.lineWidth = 2;
+        var points = [
+            {x:5, y:150, },
+            {x:30, y:10, },
+            {x:80, y:100, },
+            {x:170, y:190, },
+        ];
+
+        ctx.beginPath();
+        var start = points[points.length-1];
+        ctx.moveTo(start.x, start.y);
+
+        for (var i=0; i<points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.stroke();
+    </script>
 </body>
 </html>
