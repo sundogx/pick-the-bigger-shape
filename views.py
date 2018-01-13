@@ -2,6 +2,7 @@
 # This is the file in which app and db are instantiated.
 # For example, with hackolade, it was hackolade.py
 from HelloWorld import app, db
+from flask import render_template
 
 import constants as const
 
@@ -19,3 +20,6 @@ def testtable():
 def is_prod():
     return 'IS_PROD: {0}'.format(const.IS_PROD)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
