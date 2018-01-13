@@ -38,11 +38,7 @@
     </nav>
 
     <div class="container text-center" id="game" style='padding-top:100px'>
-        <canvas id="blah" width="200" height="200" style="border: 1px solid #808080">
-        </canvas>
-    </div>
-    <div class="container text-center" id="game" style='padding-top:100px'>
-        <div id="blah2"></div>
+        <div id="blah"></div>
     </div>
 
     <!-- Bootstrap scripts -->
@@ -50,26 +46,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script>
-        var canvas = $('#blah')[0];
-        var ctx = canvas.getContext("2d");
-        ctx.lineWidth = 2;
-        var points = [
-            {x:5, y:150, },
-            {x:30, y:10, },
-            {x:80, y:100, },
-            {x:170, y:190, },
-        ];
+        var draw_arbitrary_shape = function(dimensions, points) {
+            var points2_stringify = "'";
+            for (var i=0; i<points2.length; i++) {
+                points2_stringify += points2[i].x + "," + points2[i].y + " "
+            }
+            points2_stringify += "'";
 
-        ctx.beginPath();
-        var start = points[points.length-1];
-        ctx.moveTo(start.x, start.y);
-
-        for (var i=0; i<points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
+            var html = "";
+            html += "<svg height="+dimensions.x+" width="+dimensions.y+">";
+            html += "<polygon points=" +points2_stringify + "style='border: 1px solid #808080'"
+            html += "</svg>"
+            return html
         }
-        ctx.stroke();
-    </script>
-    <script>
+
         var dimensions = {x: 200, y: 200, }
         var points2 = [
             {x:5, y:150, },
@@ -77,17 +67,8 @@
             {x:80, y:100, },
             {x:170, y:190, },
         ];
-        var points2_stringify = "'";
-        for (var i=0; i<points2.length; i++) {
-            points2_stringify += points2[i].x + "," + points2[i].y + " "
-        }
-        points2_stringify += "'";
-
-        var html = "";
-        html += "<svg height="+dimensions.x+" width="+dimensions.y+">";
-        html += "<polygon points=" +points2_stringify + "style='border: 1px solid #808080'"
-        html += "</svg>"
-        $('#blah2').html(html)
+        var html = draw_arbitrary_shape(dimensions, points2);
+        $('#blah').html(html);
     </script>
 
 
