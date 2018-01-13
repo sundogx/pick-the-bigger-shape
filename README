@@ -1,0 +1,5 @@
+Visit https://quip.com/chaXAwobRZNi
+
+Search (via grep, ag, rg, whatever) for "TODO INIT", and follow all the instructions.
+
+Also, if this directory was created via "cp -r flask-heroku-template-project", make sure to remove the ".git" folder and initialize a new one
