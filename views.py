@@ -23,3 +23,7 @@ def is_prod():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/end')
+def end():
+	return render_template('end.html')
