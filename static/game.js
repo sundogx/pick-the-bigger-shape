@@ -1,11 +1,10 @@
 var globals = {
- 	score: 0,
- 	dimensions: {x: 200, y: 200, },
+    score: 0,
+    dimensions: {x: 200, y: 200, },
 };
 
 var gen_convex_polygon = function(dimensions) {
-	// TODO
-	var num_points = 5;
+    var num_points = 5;
     var edges =[];
     var sum_vec = {x:0,y:0,};
     for(var i = 0;i<num_points;i++){
@@ -15,7 +14,7 @@ var gen_convex_polygon = function(dimensions) {
     }
     sum_vec.x/=num_points;
     sum_vec.y/=num_points;
-    
+
     for(var i = 0;i<num_points;i++){
         edges[i].x-=sum_vec.x;
         edges[i].y-=sum_vec.y;
@@ -48,12 +47,12 @@ var gen_convex_polygon = function(dimensions) {
 }
 
 var twice_area = function(points){
-	var ans = 0;
-	for(var i = 0;i<points.length;i++){
-		ans+=points[i].x*points[(i+1)%points.length].y;
-		ans-=points[i].y*points[(i+1)%points.length].x;
-	}
-	return Math.abs(ans);
+    var ans = 0;
+    for(var i = 0;i<points.length;i++){
+        ans+=points[i].x*points[(i+1)%points.length].y;
+        ans-=points[i].y*points[(i+1)%points.length].x;
+    }
+    return Math.abs(ans);
 
 }
 var shape_html = function(dimensions, points) {
@@ -71,46 +70,51 @@ var shape_html = function(dimensions, points) {
 }
 
 var draw_shape = function(shape) {
-	var html = shape_html(shape.data('dimensions'), shape.data('points'));
-	shape.html(html);
+    var html = shape_html(shape.data('dimensions'), shape.data('points'));
+    shape.html(html);
 }
 
 var show_score = function() {
-	$('#score_field').text('Your score is: '+globals.score);
+    $('#score_field').text('Your score is: '+globals.score);
 }
 
 var show_polygons = function() {
-	$('#shape0').data('dimensions', globals.dimensions);
-	$('#shape0').data('points', gen_convex_polygon(globals.dimensions));
-	draw_shape($('#shape0'));
+    $('#shape0').data('dimensions', globals.dimensions);
+    $('#shape0').data('points', gen_convex_polygon(globals.dimensions));
+    draw_shape($('#shape0'));
 
-	$('#shape1').data('dimensions', globals.dimensions);
-	$('#shape1').data('points', gen_convex_polygon(globals.dimensions));
-	draw_shape($('#shape1'));
+    $('#shape1').data('dimensions', globals.dimensions);
+    $('#shape1').data('points', gen_convex_polygon(globals.dimensions));
+    draw_shape($('#shape1'));
 }
 
 var which_is_bigger = function(points0, points1) {
-	// TODO
-	if(twice_area(points0)>twice_area(points1)){
-		return 0;
-	}
-	else{
-		return 1;
-	}
+    if(twice_area(points0)>twice_area(points1)){
+        return 0;
+    } else{
+        return 1;
+    }
 }
 
 var guess = function(answer) {
-	var correct_answer = which_is_bigger(
-		$('#shape0').data('points'), $('#shape1').data('points')
-	);
-	if (answer === correct_answer) {
-		globals.score += 1;
-	} else {
-		globals.score = 0;
-	}
-	show_score();
-	show_polygons();
+    var correct_answer = which_is_bigger(
+        $('#shape0').data('points'), $('#shape1').data('points')
+    );
+    if (answer === correct_answer) {
+        globals.score += 1;
+    } else {
+        globals.score = 0;
+    }
+    show_score();
+    show_polygons();
 }
 
-show_score();
-show_polygons();
+var start_game = function() {
+    globals.score = 0;
+    $('#start-game').addClass('hidden-xl-down');
+    $('#game').removeClass('hidden-xl-down');
+    show_score();
+    show_polygons();
+}
+
+$('#start-button').click(start_game);

@@ -38,7 +38,11 @@
         </div>
     </nav>
 
-    <div class="container text-center" id="game" style='padding-top:100px'>
+    <div class="container text-center" id="start-game" style='padding-top:100px'>
+        <button type="button" id="start-button" class="btn btn-primary">Start Game</button>
+    </div>
+
+    <div class="container text-center hidden-xl-down" id="game" style='padding-top:100px'>
         <p id="score_field"></p>
         <p></p>
         <span id="shape0" onclick="guess(0)" style='padding:25px'></span>
