@@ -39,43 +39,21 @@
     </nav>
 
     <div class="container text-center" id="game" style='padding-top:100px'>
-        <div id="blah"></div>
+        <p id="score_field"></p>
+        <p></p>
+        <div id="shape0" onclick="guess(0)"></div><div id="shape1" onclick="guess(1)"></div>
     </div>
 
     <!-- Bootstrap scripts -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script>
-        var draw_arbitrary_shape = function(dimensions, points) {
-            var points_stringify = "'";
-            for (var i=0; i<points.length; i++) {
-                points_stringify += points[i].x + "," + points[i].y + " "
-            }
-            points_stringify += "'";
-
-            var html = "";
-            html += "<svg height="+dimensions.x+" width="+dimensions.y+">";
-            html += "<polygon points=" +points_stringify + "style='border: 1px solid #808080'"
-            html += "</svg>"
-            return html
-        }
-
-        var dimensions = {x: 200, y: 200, }
-        var points2 = [
-            {x:5, y:150, },
-            {x:30, y:10, },
-            {x:80, y:100, },
-            {x:170, y:190, },
-        ];
-        var image_html = draw_arbitrary_shape(dimensions, points2)
-        $('#blah').html(image_html);
-    </script>
+    <script src="game.js"></script>
 
 
-<svg height="500" width="500">
+<!-- <svg height="500" width="500">
   <polygon points="500,10 400,190 160,210" style="fill:lime;stroke:green;stroke-width:4" />
-</svg>
+</svg> -->
 
 </body>
 </html>
