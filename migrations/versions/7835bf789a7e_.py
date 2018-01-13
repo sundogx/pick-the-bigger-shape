@@ -24,6 +24,14 @@ def upgrade():
     sa.Column('last_modified', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('user',
+    sa.Column('name',sa.String(256),nullable = False),
+    sa.Column('score',sa.Integer(),nullable = False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created', sa.DateTime(), nullable=True),
+    sa.Column('last_modified', sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 

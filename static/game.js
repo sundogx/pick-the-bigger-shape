@@ -22,9 +22,7 @@ var gen_convex_polygon = function(dimensions) {
     edges.sort(function(pt1,pt2){
         return Math.atan2(pt1.x,pt1.y)-Math.atan2(pt2.x,pt2.y);
     });
-    for(var i = 0;i<num_points;i++){
-        console.log(Math.atan2(edges[i].x,edges[i].y));
-    }
+
     var points = [];
     var min_x = 0;
     var min_y = 0;
@@ -103,6 +101,7 @@ var guess = function(answer) {
     if (answer === correct_answer) {
         globals.score += 1;
     } else {
+        $('#score').text(globals.score);
         globals.score = 0;
     }
     show_score();

@@ -3,7 +3,7 @@
 # For example, with hackolade, it was hackolade.py
 from HelloWorld import app, db
 from flask import render_template
-
+from flask import redirect
 import constants as const
 
 import model
@@ -24,3 +24,11 @@ def is_prod():
 def index():
     return render_template('index.html')
 
+
+
+@app.route('/<name>/<score>')
+def add(name,score):
+	tt = model.User(name,score)
+	db.session.add(tt)
+	db.session.commit()
+	return redirect('/')
