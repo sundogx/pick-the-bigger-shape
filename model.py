@@ -10,9 +10,23 @@ class Base(db.Model):
     created       = db.Column(db.DateTime, default=db.func.current_timestamp())
     last_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+
+
+
 class TestTable(Base):
     __tablename__ = 'testtable'
 
     def __init__(self):
         pass
+
+
+class User(Base):
+	__tablename__ = 'user'
+	name = db.Column(db.String)
+	score = db.Column(db.Integer)
+	def __init__(self,x,y):
+		self.name = x
+		self.score = y
+
+    
 

@@ -1,0 +1,17 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<form id="form">
+  Name:<br>
+  <input type="text" name="name" id ="name"><br>
+  Score:<br>
+  <input type="text" name="score" id = "score"><br>
+  <button type = "button" name = "submit" onclick = "submitForm()">Return Home</button>
+</form>
+<script>
+function submitForm(){
+	var x = document.getElementById("name").value;
+	var y = document.getElementById("score").value;
+	window.location = "/"+x+"/"+y;
+}
+</script>
+</html>
