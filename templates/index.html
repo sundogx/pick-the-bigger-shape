@@ -39,82 +39,22 @@
     </nav>
 
     <div class="container text-center" id="game" style='padding-top:100px'>
-        <div id="blah"></div>
+        <p id="score_field"></p>
+        <p></p>
+        <div id="shape0" onclick="guess(0)"></div><div id="shape1" onclick="guess(1)"></div>
     </div>
 
     <!-- Bootstrap scripts -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script>
+
+    <script src="game.js"></script>
 
 
-        var generate_random_polygon = function(dimensions, num_points){
-            var edges =[];
-            var sum_vec = {x:0,y:0,};
-            for(var i = 0;i<num_points;i++){
-                edges.push({x:Math.random(),y:Math.random()});
-                sum_vec.x+=edges[edges.length-1].x;
-                sum_vec.y+=edges[edges.length-1].y;
-            }
-            sum_vec.x/=num_points;
-            sum_vec.y/=num_points;
-            
-            for(var i = 0;i<num_points;i++){
-                edges[i].x-=sum_vec.x;
-                edges[i].y-=sum_vec.y;
-            }
-            edges.sort(function(pt1,pt2){
-                return Math.atan2(pt1.x,pt1.y)-Math.atan2(pt2.x,pt2.y);
-            });
-            for(var i = 0;i<num_points;i++){
-                console.log(Math.atan2(edges[i].x,edges[i].y));
-            }
-            var points = [];
-            var min_x = 0;
-            var min_y = 0;
-            var max_x = 0;
-            var max_y = 0;
-            points.push({x:0,y:0,});
-            for(var i = 1;i<num_points;i++){
-                points[i] = {x:points[i-1].x + edges[i].x, y:points[i-1].y + edges[i].y,};
-                min_x = Math.min(min_x, points[i].x);
-                min_y = Math.min(min_y, points[i].y);
-                max_x = Math.max(max_x, points[i].x);
-                max_y = Math.max(max_y, points[i].y);
-            }
-            for(var i  = 0;i<num_points;i++){
-                points[i].x = dimensions.x*(points[i].x-min_x)/(max_x-min_x);
-                points[i].y = dimensions.y*(points[i].y-min_y)/(max_y-min_y);
-            }
-            return points;
-        }
-
-
-        var draw_arbitrary_shape = function(dimensions, points) {
-            var points_stringify = "'";
-            for (var i=0; i<points.length; i++) {
-                points_stringify += points[i].x + "," + points[i].y + " "
-            }
-            points_stringify += "'";
-
-            var html = "";
-            html += "<svg height="+dimensions.x+" width="+dimensions.y+">";
-            html += "<polygon points=" +points_stringify + "style='border: 1px solid #808080'"
-            html += "</svg>"
-            return html
-        }
-
-        var dimensions = {x: 200, y: 200, }
-        var points2 = generate_random_polygon(dimensions,5);
-        var image_html = draw_arbitrary_shape(dimensions, points2)
-        $('#blah').html(image_html);
-    </script>
-
-
-<svg height="500" width="500">
+<!-- <svg height="500" width="500">
   <polygon points="500,10 400,190 160,210" style="fill:lime;stroke:green;stroke-width:4" />
-</svg>
+</svg> -->
 
 </body>
 </html>
