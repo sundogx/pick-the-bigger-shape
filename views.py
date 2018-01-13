@@ -24,7 +24,9 @@ def is_prod():
 def index():
     return render_template('index.html')
 
-
+@app.route('/leaders')
+def leaders():
+    return render_template('leaders.html')
 
 @app.route('/<name>/<score>')
 def add(name,score):
