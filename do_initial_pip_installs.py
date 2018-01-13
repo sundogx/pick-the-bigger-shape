@@ -4,6 +4,7 @@ import sys
 _INITIAL_INSTALL = (
     'flask',
     'flask_migrate',
+    'flask_script',
     'flask_sqlalchemy',
     'libsass',
     'pymysql',
