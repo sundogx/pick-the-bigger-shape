@@ -101,8 +101,7 @@ var guess = function(answer) {
     if (answer === correct_answer) {
         globals.score += 1;
     } else {
-        $('#score').text(globals.score);
-        globals.score = 0;
+        end_game();
     }
     show_score();
     show_polygons();
@@ -115,5 +114,16 @@ var start_game = function() {
     show_score();
     show_polygons();
 }
-
 $('#start-button').click(start_game);
+
+var end_game = function() {
+    $('#score').text(globals.score);
+    $('#game').addClass('hidden-xl-down');
+    $('#game-over').removeClass('hidden-xl-down');
+}
+
+function submitForm(){
+    var x = $('#name').val();
+    var y = $('#score').text();
+    window.location = "/"+x+"/"+y;
+}
