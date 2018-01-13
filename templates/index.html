@@ -41,7 +41,8 @@
     <div class="container text-center" id="game" style='padding-top:100px'>
         <p id="score_field"></p>
         <p></p>
-        <span id="shape0" onclick="guess(0)"></span><span id="shape1" onclick="guess(1)"></span>
+        <span id="shape0" onclick="guess(0)" style='padding:25px'></span>
+        <span id="shape1" onclick="guess(1)" style='padding:25px'></span>
     </div>
 
     <!-- Bootstrap scripts -->
@@ -49,7 +50,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-    <script src="game.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='game.js') }}"></script>
+
 
 
 <!-- <svg height="500" width="500">
