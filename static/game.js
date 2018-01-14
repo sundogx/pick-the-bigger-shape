@@ -157,7 +157,7 @@ var guess = function(answer, concave) {
     } else {
         end_game();
     }
-    if(globals.score>=5){
+    if(globals.score>=10){
         concave=true
     }
     show_score();
