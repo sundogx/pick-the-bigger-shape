@@ -188,6 +188,7 @@ var submit_form = function(){
     $('#name').val('');
     $('#game-over').addClass('hidden-xl-down');
     $('#start-game').removeClass('hidden-xl-down');
+    start_game();
 }
 $('#submit-name').click(submit_form);
 $('#name').keypress(function(event) {
