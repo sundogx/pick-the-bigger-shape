@@ -1,5 +1,6 @@
 var globals = {
     score: 0,
+    active: false,
     dimensions: {x: 200, y: 200, },
 };
 var add = function(first_point, second_point){
@@ -57,7 +58,6 @@ var edge_intersect = function(first_pos, first_edge, second_pos,second_edge){
     return true;
 }
 var gen_convex_polygon = function(dimensions, concave = false) {
-    // TODO
     var num_points = 5;
     var concave_tries = 1000;
     if(concave){
@@ -72,14 +72,14 @@ var gen_convex_polygon = function(dimensions, concave = false) {
             edges = gen_sides(num_points);
             edges.sort(function(pt1,pt2){
                 return Math.atan2(pt1.x,pt1.y)-Math.atan2(pt2.x,pt2.y);
-            });  
+            });
         }
     }
     else{
         edges = gen_sides(num_points);
         edges.sort(function(pt1,pt2){
             return Math.atan2(pt1.x,pt1.y)-Math.atan2(pt2.x,pt2.y);
-        });    
+        });
 
     }
     var points = [];
@@ -166,6 +166,7 @@ var guess = function(answer, concave) {
 
 var start_game = function() {
     globals.score = 0;
+    globals.active = true;
     $('#start-game').addClass('hidden-xl-down');
     $('#game').removeClass('hidden-xl-down');
     show_score();
@@ -174,6 +175,7 @@ var start_game = function() {
 $('#start-button').click(start_game);
 
 var end_game = function() {
+    globals.active = false;
     $('#score').text(globals.score);
     $('#game').addClass('hidden-xl-down');
     $('#game-over').removeClass('hidden-xl-down');
@@ -194,3 +196,13 @@ $('#name').keypress(function(event) {
     }
 });
 
+$(document).on("keydown", function (e) {
+    if (!globals.active) {
+        return;
+    }
+    if (e.which === 37) {
+        guess(0);
+    } else if (e.which === 39) {
+        guess(1);
+    }
+});
