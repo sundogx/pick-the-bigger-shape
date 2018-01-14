@@ -1,3 +1,10 @@
 <html>
 Leaders
+<p id="leaderboard"></p>
 </html>
+
+<script>
+var data_string = "{{leaders}}".replace(/&#34;/g,'"');
+var data = JSON.parse(data_string);
+document.getElementById("leaderboard").innerHTML = data ;
+</script>
