@@ -2,11 +2,12 @@
 # This is the file in which app and db are instantiated.
 # For example, with hackolade, it was hackolade.py
 from HelloWorld import app, db
-from flask import render_template
-from flask import redirect
+from flask import jsonify
+from flask import redirect, render_template, request
 import constants as const
-
+import json
 import model
+from model import User
 
 @app.route('/testtable')
 def testtable():
@@ -24,11 +25,25 @@ def is_prod():
 def index():
     return render_template('index.html')
 
+@app.route('/leaders')
+def leaders():
+    all = User.query.filter(User.score>0).all()
+    scores=[[int(user.score),str(user.name)] for user in all]
+    scores.sort(reverse = True)
+    leaders=[]
+    for i in range(10):
+        if(i<len(scores)):
+            leaders.append([scores[i][1],scores[i][0]])
+    print(json.dumps(leaders))
+    return render_template('leaders.html',leaders= json.dumps(leaders))
 
+@app.route('/score', methods=['POST'])
+def add_score():
+    assert request.method == 'POST'
+    score = request.form['score']
+    name = request.form['name']
+    tt = model.User(name,score)
+    db.session.add(tt)
+    db.session.commit()
+    return ('', 204) # empty response
 
-@app.route('/<name>/<score>')
-def add(name,score):
-	tt = model.User(name,score)
-	db.session.add(tt)
-	db.session.commit()
-	return redirect('/')
