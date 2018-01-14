@@ -130,13 +130,13 @@ var show_score = function() {
     $('#score_field').text('Your score is: '+globals.score);
 }
 
-var show_polygons = function() {
+var show_polygons = function(concave) {
     $('#shape0').data('dimensions', globals.dimensions);
-    $('#shape0').data('points', gen_convex_polygon(globals.dimensions));
+    $('#shape0').data('points', gen_convex_polygon(globals.dimensions,concave));
     draw_shape($('#shape0'));
 
     $('#shape1').data('dimensions', globals.dimensions);
-    $('#shape1').data('points', gen_convex_polygon(globals.dimensions));
+    $('#shape1').data('points', gen_convex_polygon(globals.dimensions,concave));
     draw_shape($('#shape1'));
 }
 
@@ -148,7 +148,7 @@ var which_is_bigger = function(points0, points1) {
     }
 }
 
-var guess = function(answer) {
+var guess = function(answer, concave) {
     var correct_answer = which_is_bigger(
         $('#shape0').data('points'), $('#shape1').data('points')
     );
@@ -157,8 +157,11 @@ var guess = function(answer) {
     } else {
         end_game();
     }
+    if(globals.score>=5){
+        concave=true
+    }
     show_score();
-    show_polygons();
+    show_polygons(concave);
 }
 
 var start_game = function() {
