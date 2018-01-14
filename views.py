@@ -42,7 +42,7 @@ def add_score():
     assert request.method == 'POST'
     score = request.form['score']
     name = request.form['name']
-    if (int(score) >= 980):
+    if (int(score) < 980):
         tt = model.User(name,score)
         db.session.add(tt)
         db.session.commit()
