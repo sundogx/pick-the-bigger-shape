@@ -122,8 +122,18 @@ var end_game = function() {
     $('#game-over').removeClass('hidden-xl-down');
 }
 
-function submitForm(){
-    var x = $('#name').val();
-    var y = $('#score').text();
-    window.location = "/"+x+"/"+y;
+function submit_form(){
+    var name = $('#name').val();
+    var score = $('#score').text();
+    $.post("score",{name: name, score: score});
+    $('#name').val('');
+    $('#game-over').addClass('hidden-xl-down');
+    $('#start-game').removeClass('hidden-xl-down');
 }
+$('#submit-name').click(submit_form);
+$('#name').keypress(function(event) {
+    if (event.keyCode === 13) { // return
+        submit_form();
+    }
+});
+
