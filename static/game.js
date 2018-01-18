@@ -176,7 +176,7 @@ $('#start-button').click(start_game);
 
 var end_game = function() {
     globals.active = false;
-    $('#score').text(globals.score);
+    $('#score').text(globals.score + "moo");
     $('#game').addClass('hidden-xl-down');
     $('#game-over').removeClass('hidden-xl-down');
 }
