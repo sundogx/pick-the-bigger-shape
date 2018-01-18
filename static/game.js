@@ -176,7 +176,7 @@ $('#start-button').click(start_game);
 
 var end_game = function() {
     globals.active = false;
-    $('#score').text(globals.score + "." + ((globals.score >= 50) ? " Congratulations! Your have correctly identified at least FIFTY shapes! You are a pick the bigger shape master. Now, one last question for you. At which number shape are concave polygons allowed to appear?" : ""));
+    $('#score').text(globals.score + ((globals.score >= 3) ? " Congratulations! Your have correctly identified at least FIFTY shapes! You are a pick the bigger shape master. Now, one last question for you. At which number shape are concave polygons allowed to appear?" : ""));
     $('#game').addClass('hidden-xl-down');
     $('#game-over').removeClass('hidden-xl-down');
 }
